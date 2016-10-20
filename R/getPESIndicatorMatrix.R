@@ -9,7 +9,6 @@
 #' @examples 
 #' seasons <- c(1,2,3,3)
 #' getPESIndicator(seasons)
-#' 
 #' 1 0 0 0
 #' 0 1 0 0
 #' 0 0 1 1
