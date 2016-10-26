@@ -8,7 +8,7 @@ gen.Data <- function(Trend,Seasonality,Period,Length){
   data <- numeric(Length)
   
   if(Seasonality == 1){
-    SeasInd <- c(1)
+    SeasInd <- c(1,1)
   }
   
   if(Seasonality == 2){
@@ -45,42 +45,42 @@ if(Seasonality == 3){
 }
 
 temp <- SeasInd[1]
-SeasInd[1:(Period - 1)] <- SeasInd[2:Period]
-SeasInd[Period] <- temp
+SeasInd[1:(length(SeasInd)-1)] <- SeasInd[2:length(SeasInd)]
+SeasInd[length(SeasInd)] <- temp
 
 for(i in 2:Period){
   Last <- data[(i-1)]
   if(Seasonality == 2 && Trend == 2){
-    data[i] <- Last + SeasInd[1] + T + runif(n=1, mean = 0, sd = 1)
+    data[i] <- Last + SeasInd[1] + T + rnorm(n=1, mean = 0, sd = 1)
   }
   if(Seasonality == 2 && Trend == 3){
-    data[i] <- Last*T + SeasInd[1] + runif(n=1, mean = 0, sd = 1)
+    data[i] <- Last*T + SeasInd[1] + rnorm(n=1, mean = 0, sd = 1)
   }
   if(Seasonality == 3 && Trend == 2){
-    data[i] <- Last*SeasInd[1] + T + runif(n=1, mean = 0, sd = 1)
+    data[i] <- Last*SeasInd[1] + T + rnorm(n=1, mean = 0, sd = 1)
   }
   if(Seasonality == 3 && Trend == 3){
-    data[i] <- Last*SeasInd[1]*T + runif(n=1, mean = 0, sd = 1)
+    data[i] <- Last*SeasInd[1]*T + rnorm(n=1, mean = 0, sd = 1)
   }
   if(Seasonality == 1 && Trend == 1){
-    data[i] <- Last + runif(n=1, mean = 0, sd = 1)
+    data[i] <- Last + rnorm(n=1, mean = 0, sd = 1)
   }
   if(Seasonality == 1 && Trend == 2){
-    data[i] <- Last + T + runif(n=1, mean = 0, sd = 1)
+    data[i] <- Last + T + rnorm(n=1, mean = 0, sd = 1)
   }
   if(Seasonality == 1 && Trend == 3){
-    data[i] <- Last*T + runif(n=1, mean = 0, sd = 1)
+    data[i] <- Last*T + rnorm(n=1, mean = 0, sd = 1)
   }
   if(Seasonality == 2 && Trend == 1){
-    data[i] <- Last + SeasInd[1] + runif(n=1, mean = 0, sd = 1)
+    data[i] <- Last + SeasInd[1] + rnorm(n=1, mean = 0, sd = 1)
   }
   if(Seasonality == 3 && Trend == 1){
-    data[i] <- Last*SeasInd[1] + runif(n=1, mean = 0, sd = 1)
+    data[i] <- Last*SeasInd[1] + rnorm(n=1, mean = 0, sd = 1)
   }
   
   temp <- SeasInd[1]
-  SeasInd[1:(Period - 1)] <- SeasInd[2:Period]
-  SeasInd[Period] <- temp
+  SeasInd[1:(length(SeasInd)-1)] <- SeasInd[2:length(SeasInd)]
+  SeasInd[length(SeasInd)] <- temp
 }
 
 return(data)
