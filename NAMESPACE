@@ -3,4 +3,5 @@
 export(MeanAbsoluteError)
 export(MeanAbsolutePercentageError)
 export(RootMeanSquaredError)
+export(gen.Data)
 export(getPESIndicator)
