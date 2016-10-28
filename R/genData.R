@@ -19,7 +19,7 @@ gen.Data <- function(Trend,Seasonality,Period,Length){
   
   if(Seasonality == 3){
     SeasInd <- numeric(Period)
-    SeasInd[1:(Period - 1)] <- rnorm(n = Period - 1, mean = 1.02, sd = 0.1)
+    SeasInd[1:(Period - 1)] <- rnorm(n = Period - 1, mean = 1, sd = 0.01)
     if(min(SeasInd) < 0){
       SeasInd <- 1 - min(SeasInd)
     }
@@ -28,14 +28,18 @@ gen.Data <- function(Trend,Seasonality,Period,Length){
   }
   
 if(Trend == 2){
-  T <- runif(1,3)
+  T <- runif(n=1,min=1,max=3)
 }
   
 if(Trend == 3){
-  T <- runif(1.01,1.08)
+  T <- runif(n=1,min=1.01,max=1.08)
 }
 
 InitPoint <- runif(n = 1, min = 5, max = 10)
+
+if(Seasonality == 1){
+  data[1] <- InitPoint
+}
 
 if(Seasonality == 2){
   data[1] <- InitPoint + SeasInd[1]
@@ -48,7 +52,7 @@ temp <- SeasInd[1]
 SeasInd[1:(length(SeasInd)-1)] <- SeasInd[2:length(SeasInd)]
 SeasInd[length(SeasInd)] <- temp
 
-for(i in 2:Period){
+for(i in 2:Length){
   Last <- data[(i-1)]
   if(Seasonality == 2 && Trend == 2){
     data[i] <- Last + SeasInd[1] + T + rnorm(n=1, mean = 0, sd = 1)
