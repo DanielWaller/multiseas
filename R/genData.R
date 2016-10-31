@@ -19,12 +19,8 @@ gen.Data <- function(Trend,Seasonality,Period,Length){
   
   if(Seasonality == 3){
     SeasInd <- numeric(Period)
-    SeasInd[1:(Period - 1)] <- rnorm(n = Period - 1, mean = 1, sd = 0.01)
-    if(min(SeasInd) < 0){
-      SeasInd <- 1 - min(SeasInd)
-    }
-    SeasInd[Period] <- 1; SeasInd <- log(SeasInd)
-    SeasInd[Period] <- 1; SeasInd[Period] <- 1/prod(SeasInd)
+    SeasInd[1:(Period - 1)] <- rnorm(n = Period - 1, mean = 0, sd = 0.01)
+    SeasInd <- exp(SeasInd); SeasInd[Period] <- 1/prod(SeasInd)
   }
   
 if(Trend == 2){
