@@ -19,7 +19,7 @@ gen.Data <- function(Trend,Seasonality,Period,Length){
   
   if(Seasonality == 3){
     SeasInd <- numeric(Period)
-    SeasInd[1:(Period - 1)] <- rnorm(n = Period - 1, mean = 0, sd = 0.01)
+    SeasInd[1:(Period - 1)] <- rnorm(n = Period - 1, mean = 0, sd = 0.5)
     SeasInd <- exp(SeasInd); SeasInd[Period] <- 1/prod(SeasInd)
   }
   
